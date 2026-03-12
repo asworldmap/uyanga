@@ -9,163 +9,153 @@
 <style>
 
 :root{
---lipstick:#B3123A;
---pastel:#fff5f7;
+--lip:#b3123a;
+--soft:#fff4f6;
+--text:#333;
+}
+
+*{
+box-sizing:border-box;
 }
 
 body{
 margin:0;
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-background:linear-gradient(135deg,#fff5f7,#fdf0f3);
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+background:linear-gradient(160deg,#fff6f8,#ffeef2);
 display:flex;
-align-items:center;
 justify-content:center;
-height:100vh;
-color:#333;
+align-items:center;
+min-height:100vh;
+color:var(--text);
 }
 
-/* language buttons */
+/* language switch */
 
 .lang{
 position:absolute;
-top:20px;
-right:20px;
+top:18px;
+right:18px;
 font-size:22px;
-cursor:pointer;
 }
 
 .lang span{
+cursor:pointer;
 margin-left:8px;
-opacity:0.6;
-}
-
-.lang span:hover{
-opacity:1;
 }
 
 /* card */
 
 .card{
+width:92%;
+max-width:420px;
 background:white;
-padding:40px;
-border-radius:18px;
-max-width:520px;
+border-radius:20px;
+padding:28px;
+box-shadow:0 20px 40px rgba(0,0,0,0.08);
 text-align:center;
-box-shadow:0 15px 40px rgba(0,0,0,0.08);
 }
 
-/* photo carousel */
+/* image */
 
-.photo-container{
+.carousel{
 position:relative;
-width:120px;
-height:120px;
+width:110px;
+height:110px;
 margin:auto;
-margin-bottom:20px;
+margin-bottom:14px;
 }
 
-.photo{
+.carousel img{
 position:absolute;
-width:120px;
-height:120px;
-border-radius:50%;
+width:110px;
+height:110px;
 object-fit:cover;
-border:4px solid var(--lipstick);
+border-radius:50%;
+border:4px solid var(--lip);
 opacity:0;
-transition:0.4s;
+transition:0.6s;
 }
 
-.photo.active{
+.carousel img.active{
 opacity:1;
 }
 
-.photo-nav{
-margin-top:10px;
-}
-
-.dot{
-height:10px;
-width:10px;
-margin:0 5px;
-background:#ddd;
-border-radius:50%;
-display:inline-block;
-cursor:pointer;
-}
-
-.dot.active{
-background:var(--lipstick);
-}
-
-/* text */
+/* name */
 
 h1{
-margin:10px 0 5px 0;
-font-size:28px;
+font-size:24px;
+margin:10px 0 4px;
 }
+
+/* title */
 
 .title{
-color:var(--lipstick);
+color:var(--lip);
 font-weight:600;
-margin-bottom:10px;
+font-size:15px;
+margin-bottom:6px;
 }
+
+/* location */
 
 .location{
-font-size:14px;
-color:#666;
-margin-bottom:20px;
+font-size:13px;
+color:#777;
+margin-bottom:16px;
 }
 
+/* bio */
+
 .bio{
+font-size:14px;
 line-height:1.6;
-font-size:15px;
-margin-bottom:30px;
-color:#444;
+margin-bottom:22px;
 }
 
 /* buttons */
 
 .buttons{
 display:flex;
+gap:10px;
 justify-content:center;
-gap:15px;
 }
 
 .btn{
-text-decoration:none;
-padding:12px 22px;
-border-radius:8px;
+flex:1;
+padding:12px;
+border-radius:10px;
 font-weight:600;
+text-decoration:none;
+font-size:14px;
 transition:0.2s;
 }
 
 .linkedin{
-background:var(--lipstick);
+background:var(--lip);
 color:white;
 }
 
 .instagram{
-border:2px solid var(--lipstick);
-color:var(--lipstick);
+border:2px solid var(--lip);
+color:var(--lip);
 }
 
-.btn:hover{
-transform:translateY(-2px);
-opacity:0.9;
+.btn:active{
+transform:scale(0.97);
 }
+
+/* footer */
 
 .footer{
-margin-top:25px;
-font-size:12px;
-color:#888;
+margin-top:18px;
+font-size:11px;
+color:#999;
 }
 
 </style>
 </head>
 
 <body>
-
-<!-- language switch -->
 
 <div class="lang">
 <span onclick="setLang('en')">🇬🇧</span>
@@ -175,14 +165,9 @@ color:#888;
 
 <div class="card">
 
-<div class="photo-container">
-<img class="photo active" src="photo1.jpg">
-<img class="photo" src="photo2.jpg">
-</div>
-
-<div class="photo-nav">
-<span class="dot active" onclick="showPhoto(0)"></span>
-<span class="dot" onclick="showPhoto(1)"></span>
+<div class="carousel">
+<img src="photo1.jpg" class="active">
+<img src="photo2.jpg">
 </div>
 
 <h1>Uyanga Uugankhuu</h1>
@@ -196,9 +181,7 @@ Ulaanbaatar, Mongolia
 </div>
 
 <div class="bio" id="bio">
-Uyanga Uugankhuu is an International Relations student at the National University of Mongolia. 
-She has gained experience through internships at the Ministry of Foreign Affairs of Mongolia and Monlogistics Group. 
-Her interests include diplomacy, international cooperation and geopolitical dynamics in Eurasia.
+Uyanga Uugankhuu is an International Relations student at the National University of Mongolia. She has interned at the Ministry of Foreign Affairs of Mongolia and Monlogistics Group. Her interests include diplomacy, international cooperation and Eurasian geopolitics.
 </div>
 
 <div class="buttons">
@@ -221,38 +204,44 @@ National University of Mongolia
 
 <script>
 
-/* photo switch */
+/* IMAGE CAROUSEL */
 
-let photos=document.querySelectorAll(".photo");
-let dots=document.querySelectorAll(".dot");
+let images=document.querySelectorAll(".carousel img");
+let current=0;
 
-function showPhoto(i){
-photos.forEach(p=>p.classList.remove("active"));
-dots.forEach(d=>d.classList.remove("active"));
-photos[i].classList.add("active");
-dots[i].classList.add("active");
+function changePhoto(){
+
+images[current].classList.remove("active");
+
+current=(current+1)%images.length;
+
+images[current].classList.add("active");
+
 }
 
-/* language system */
+setInterval(changePhoto,3000);
+
+
+/* LANGUAGE */
 
 const text={
 
 en:{
 title:"International Relations Student",
 location:"Ulaanbaatar, Mongolia",
-bio:"Uyanga Uugankhuu is an International Relations student at the National University of Mongolia. She has gained experience through internships at the Ministry of Foreign Affairs of Mongolia and Monlogistics Group. Her interests include diplomacy, international cooperation and geopolitical dynamics in Eurasia."
+bio:"Uyanga Uugankhuu is an International Relations student at the National University of Mongolia. She has interned at the Ministry of Foreign Affairs of Mongolia and Monlogistics Group. Her interests include diplomacy, international cooperation and Eurasian geopolitics."
 },
 
 mn:{
 title:"Олон улсын харилцааны оюутан",
 location:"Улаанбаатар, Монгол",
-bio:"Уянга Ууганхүү нь Монгол Улсын Их Сургуулийн Олон улсын харилцааны чиглэлээр суралцаж буй оюутан юм. Тэрээр Монгол Улсын Гадаад харилцааны яам болон Monlogistics компанид дадлага хийж байсан туршлагатай. Түүний сонирхол нь дипломат харилцаа, олон улсын хамтын ажиллагаа болон Евразийн геополитикт төвлөрдөг."
+bio:"Уянга Ууганхүү нь Монгол Улсын Их Сургуулийн Олон улсын харилцааны чиглэлээр суралцаж буй оюутан юм. Тэрээр Монгол Улсын Гадаад харилцааны яам болон Monlogistics компанид дадлага хийж байсан туршлагатай."
 },
 
 ru:{
 title:"Студентка международных отношений",
 location:"Улан-Батор, Монголия",
-bio:"Уянга Ууганху является студенткой факультета международных отношений Национального университета Монголии. Она проходила стажировки в Министерстве иностранных дел Монголии и в компании Monlogistics. Ее интересы включают дипломатию, международное сотрудничество и геополитику Евразии."
+bio:"Уянга Ууганху является студенткой факультета международных отношений Национального университета Монголии. Она проходила стажировку в Министерстве иностранных дел Монголии и компании Monlogistics."
 }
 
 }
