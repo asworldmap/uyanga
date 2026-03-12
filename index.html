@@ -10,13 +10,9 @@
 
 :root{
 --lip:#b3123a;
---soft:#fff4f6;
---text:#333;
 }
 
-*{
-box-sizing:border-box;
-}
+*{box-sizing:border-box;}
 
 body{
 margin:0;
@@ -26,10 +22,10 @@ display:flex;
 justify-content:center;
 align-items:center;
 min-height:100vh;
-color:var(--text);
+color:#333;
 }
 
-/* language switch */
+/* language */
 
 .lang{
 position:absolute;
@@ -40,7 +36,7 @@ font-size:22px;
 
 .lang span{
 cursor:pointer;
-margin-left:8px;
+margin-left:10px;
 }
 
 /* card */
@@ -49,8 +45,8 @@ margin-left:8px;
 width:92%;
 max-width:420px;
 background:white;
-border-radius:20px;
-padding:28px;
+border-radius:22px;
+padding:30px;
 box-shadow:0 20px 40px rgba(0,0,0,0.08);
 text-align:center;
 }
@@ -59,19 +55,19 @@ text-align:center;
 
 .carousel{
 position:relative;
-width:110px;
-height:110px;
+width:150px;
+height:150px;
 margin:auto;
-margin-bottom:14px;
+margin-bottom:16px;
 }
 
 .carousel img{
 position:absolute;
-width:110px;
-height:110px;
+width:150px;
+height:150px;
 object-fit:cover;
 border-radius:50%;
-border:4px solid var(--lip);
+border:5px solid var(--lip);
 opacity:0;
 transition:0.6s;
 }
@@ -80,14 +76,12 @@ transition:0.6s;
 opacity:1;
 }
 
-/* name */
+/* text */
 
 h1{
 font-size:24px;
-margin:10px 0 4px;
+margin:8px 0 4px;
 }
-
-/* title */
 
 .title{
 color:var(--lip);
@@ -96,20 +90,16 @@ font-size:15px;
 margin-bottom:6px;
 }
 
-/* location */
-
 .location{
 font-size:13px;
 color:#777;
-margin-bottom:16px;
+margin-bottom:14px;
 }
-
-/* bio */
 
 .bio{
 font-size:14px;
 line-height:1.6;
-margin-bottom:22px;
+margin-bottom:20px;
 }
 
 /* buttons */
@@ -140,14 +130,8 @@ border:2px solid var(--lip);
 color:var(--lip);
 }
 
-.btn:active{
-transform:scale(0.97);
-}
-
-/* footer */
-
 .footer{
-margin-top:18px;
+margin-top:16px;
 font-size:11px;
 color:#999;
 }
@@ -157,17 +141,13 @@ color:#999;
 
 <body>
 
-<div class="lang">
-<span onclick="setLang('en')">🇬🇧</span>
-<span onclick="setLang('mn')">🇲🇳</span>
-<span onclick="setLang('ru')">🇷🇺</span>
-</div>
+<div class="lang" id="flags"></div>
 
 <div class="card">
 
 <div class="carousel">
-<img src="photo1.jpg" class="active">
-<img src="photo2.jpg">
+<img src="photo2.jpg" class="active">
+<img src="photo1.jpg">
 </div>
 
 <h1>Uyanga Uugankhuu</h1>
@@ -181,7 +161,7 @@ Ulaanbaatar, Mongolia
 </div>
 
 <div class="bio" id="bio">
-Uyanga Uugankhuu is an International Relations student at the National University of Mongolia. She has interned at the Ministry of Foreign Affairs of Mongolia and Monlogistics Group. Her interests include diplomacy, international cooperation and Eurasian geopolitics.
+I am an International Relations student at the National University of Mongolia. I previously interned at the Ministry of Foreign Affairs of Mongolia and Monlogistics Group. I also participated in the Ship for World Youth program organized by the Government of Japan, an international leadership and cultural exchange initiative bringing together young leaders from around the world. My interests include diplomacy, international cooperation and Eurasian geopolitics.
 </div>
 
 <div class="buttons">
@@ -219,40 +199,68 @@ images[current].classList.add("active");
 
 }
 
-setInterval(changePhoto,3000);
+setInterval(changePhoto,5000);
 
 
-/* LANGUAGE */
+/* LANGUAGE TEXT */
 
 const text={
 
 en:{
 title:"International Relations Student",
 location:"Ulaanbaatar, Mongolia",
-bio:"Uyanga Uugankhuu is an International Relations student at the National University of Mongolia. She has interned at the Ministry of Foreign Affairs of Mongolia and Monlogistics Group. Her interests include diplomacy, international cooperation and Eurasian geopolitics."
+bio:"I am an International Relations student at the National University of Mongolia. I previously interned at the Ministry of Foreign Affairs of Mongolia and Monlogistics Group. I also participated in the Ship for World Youth program organized by the Government of Japan, an international leadership and cultural exchange initiative bringing together young leaders from around the world. My interests include diplomacy, international cooperation and Eurasian geopolitics."
 },
 
 mn:{
 title:"Олон улсын харилцааны оюутан",
 location:"Улаанбаатар, Монгол",
-bio:"Уянга Ууганхүү нь Монгол Улсын Их Сургуулийн Олон улсын харилцааны чиглэлээр суралцаж буй оюутан юм. Тэрээр Монгол Улсын Гадаад харилцааны яам болон Monlogistics компанид дадлага хийж байсан туршлагатай."
+bio:"Би Монгол Улсын Их Сургуулийн Олон улсын харилцааны чиглэлээр суралцаж байна. Би Монгол Улсын Гадаад харилцааны яам болон Monlogistics компанид дадлага хийж байсан. Мөн Японы Засгийн газраас зохион байгуулдаг Ship for World Youth хөтөлбөрт оролцож, олон улсын залуучуудын манлайлал болон соёлын солилцооны туршлага хуримтлуулсан."
 },
 
 ru:{
 title:"Студентка международных отношений",
 location:"Улан-Батор, Монголия",
-bio:"Уянга Ууганху является студенткой факультета международных отношений Национального университета Монголии. Она проходила стажировку в Министерстве иностранных дел Монголии и компании Monlogistics."
+bio:"Я студентка факультета международных отношений Национального университета Монголии. Я проходила стажировку в Министерстве иностранных дел Монголии и компании Monlogistics. Также я участвовала в программе Ship for World Youth, организованной правительством Японии, международной программе лидерства и культурного обмена."
+}
+
+}
+
+let currentLang="en";
+
+function renderFlags(){
+
+const container=document.getElementById("flags");
+
+container.innerHTML="";
+
+if(currentLang!=="en"){
+container.innerHTML+=`<span onclick="setLang('en')">🇬🇧</span>`;
+}
+
+if(currentLang!=="mn"){
+container.innerHTML+=`<span onclick="setLang('mn')">🇲🇳</span>`;
+}
+
+if(currentLang!=="ru"){
+container.innerHTML+=`<span onclick="setLang('ru')">🇷🇺</span>`;
 }
 
 }
 
 function setLang(lang){
 
+currentLang=lang;
+
 document.getElementById("title").innerText=text[lang].title
 document.getElementById("location").innerText=text[lang].location
 document.getElementById("bio").innerText=text[lang].bio
 
+renderFlags()
+
 }
+
+renderFlags()
 
 </script>
 
